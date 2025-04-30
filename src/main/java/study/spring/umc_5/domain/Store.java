@@ -22,7 +22,7 @@ public class Store extends BaseEntity {
     private String address;
 
     @Column(nullable = false)
-    private double score;
+    private float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")

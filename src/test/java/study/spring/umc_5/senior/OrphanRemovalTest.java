@@ -1,8 +1,5 @@
 package study.spring.umc_5.senior;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +18,7 @@ import study.spring.umc_5.repository.MemberRepository;
 import java.util.List;
 
 @SpringBootTest
-public class BatchDeleteTest {
+public class OrphanRemovalTest {
 
     @Autowired
     private FoodCategoryRepository foodRepository;
@@ -31,10 +28,6 @@ public class BatchDeleteTest {
 
     @Autowired
     private MemberPreferRepository memberPreferRepository;
-
-    @PersistenceContext
-    private EntityManager em;
-
 
     @DisplayName("")
     @Test
@@ -73,17 +66,20 @@ public class BatchDeleteTest {
         memberPreferRepository.saveAll(List.of(memberPrefer1, memberPrefer2, memberPrefer3));
     }
 
-    @DisplayName("멤버를 삭제하면 그와 연관된 모든 테이블을 한번에 삭제한다.")
+    @DisplayName("orphanRemoval = true 옵션을 통한 선호 음식 리스트에서 특정 선호 음식 선호 내역 삭제 ")
     @Test
     @Transactional
     @Commit
-    void deleteMemberWithBatchDelete(){
+    void orphanRemovalTest(){
 
+        //given
+        Member member = memberRepository.findById(8L).get();
+        FoodCategory foodCategory = foodRepository.findById(22L).get();
 
-        memberPreferRepository.deleteByMemberId(11L);
+        member.removePrefer(foodCategory);
+        //when
 
-        memberRepository.deleteById(11L);
-
+        //then
     }
 
     private MemberPrefer createMemberPrefer(Member member, FoodCategory category) {
