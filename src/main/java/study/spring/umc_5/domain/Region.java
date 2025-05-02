@@ -21,7 +21,7 @@ public class Region extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Store> stores = new ArrayList<>();
 }

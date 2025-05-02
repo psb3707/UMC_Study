@@ -1,4 +1,4 @@
-package study.spring.umc_5.repository.StoreRepository;
+package study.spring.umc_5.repository.store;
 
 import study.spring.umc_5.domain.Store;
 
