@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import study.spring.umc_5.domain.common.BaseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -27,4 +30,13 @@ public class Store extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Mission> missions = new ArrayList<>();
+
+    public void setRegion(Region region) {
+        this.region = region;
+        region.getStores().add(this);
+    }
 }

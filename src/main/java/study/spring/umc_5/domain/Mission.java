@@ -25,4 +25,13 @@ public class Mission extends BaseEntity {
 
     @Column(nullable = false, length = 50)
     private String missionSpec;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    public void setStore(Store store) {
+        this.store = store;
+        store.getMissions().add(this);
+    }
 }

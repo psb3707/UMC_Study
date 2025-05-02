@@ -1,4 +1,4 @@
-package study.spring.umc_5.repository.StoreRepository;
+package study.spring.umc_5.repository.store;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.groups.Tuple;
@@ -11,12 +11,10 @@ import study.spring.umc_5.domain.Store;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class StoreRepositoryImplTest {
 
-    @Autowired private CustomStoreRepository customStoreRepository;
+//    @Autowired private CustomStoreRepository customStoreRepository;
     @Autowired private StoreRepository storeRepository;
 
 
@@ -45,7 +43,7 @@ class StoreRepositoryImplTest {
         storeRepository.saveAll(List.of(store1, store2, store3));
 
         //when
-        List<Store> result = customStoreRepository.dynamicQueryWithBooleanBuilder("춘리마라탕",4.0f);
+        List<Store> result = storeRepository.dynamicQueryWithBooleanBuilder("춘리마라탕",4.0f);
 
         //then
         Assertions.assertThat(result).hasSize(1)
