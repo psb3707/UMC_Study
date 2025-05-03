@@ -12,7 +12,7 @@ import study.spring.umc_5.domain.enums.MemberStatus;
 import study.spring.umc_5.domain.mapping.MemberPrefer;
 import study.spring.umc_5.repository.FoodCategoryRepository;
 import study.spring.umc_5.repository.MemberPreferRepository;
-import study.spring.umc_5.repository.MemberRepository;
+import study.spring.umc_5.repository.member.MemberRepository;
 
 import java.util.List;
 

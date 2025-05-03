@@ -47,14 +47,16 @@ public class MemberMissionRepositoryImpl implements CustomMemberMissionRepositor
     }
 
     @Override
-    public long countCompletedMisisonsByRegionId(Long regionId) {
+    public long countCompletedMisisonsByRegionId(Long regionId, Long memberId) {
         return Optional.ofNullable(queryFactory
                 .select(memberMission.count())
                 .from(memberMission)
                 .join(memberMission.mission, mission)
-                .join(mission.store, store)
-                .join(store.region, region)
+                .join(mission.region, region)
+//                .join(mission.store, store)
+//                .join(store.region, region)
                 .where(
+                        memberIdEq(memberId),
                         regionIdEq(regionId),
                         missionStatusEq(MissionStatus.COMPLETE)
                 )
@@ -62,7 +64,13 @@ public class MemberMissionRepositoryImpl implements CustomMemberMissionRepositor
     }
 
     private BooleanExpression regionIdEq(Long regionId) {
-        return memberMission.mission.store.region.id.eq(regionId);
+
+        if (regionId == null) {
+            return null;
+        }
+
+//        return region.id.eq(regionId);
+        return memberMission.mission.region.id.eq(regionId);
     }
 
     private Predicate lastMemberMissionIdLt(Long lastMemberMissionId) {
@@ -72,7 +80,7 @@ public class MemberMissionRepositoryImpl implements CustomMemberMissionRepositor
         return memberMission.id.lt(lastMemberMissionId);
     }
 
-    private Predicate missionStatusEq(MissionStatus missionStatus) {
+    private BooleanExpression missionStatusEq(MissionStatus missionStatus) {
 
         if (missionStatus == null) {
             return null;

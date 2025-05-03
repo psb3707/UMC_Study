@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomMissionRepository {
 
-    List<Mission> findAllChallengableMissions(Long regionId);
+    List<Mission> findAllChallengableMissions(Long regionId, Long memberId, Long lastMissionId, Long limit);
 }

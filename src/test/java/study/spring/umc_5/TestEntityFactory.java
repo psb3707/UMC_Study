@@ -33,6 +33,12 @@ public class TestEntityFactory {
                 .build();
     }
 
+    public static Region createTestRegion() {
+        return Region.builder()
+                .name("군포시")
+                .build();
+    }
+
 
     public static Mission createTestMission() {
         return Mission.builder()

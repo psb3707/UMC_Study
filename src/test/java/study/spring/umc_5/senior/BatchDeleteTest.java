@@ -2,7 +2,6 @@ package study.spring.umc_5.senior;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import study.spring.umc_5.domain.enums.MemberStatus;
 import study.spring.umc_5.domain.mapping.MemberPrefer;
 import study.spring.umc_5.repository.FoodCategoryRepository;
 import study.spring.umc_5.repository.MemberPreferRepository;
-import study.spring.umc_5.repository.MemberRepository;
+import study.spring.umc_5.repository.member.MemberRepository;
 
 import java.util.List;
 

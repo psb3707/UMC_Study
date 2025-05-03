@@ -1,6 +1,5 @@
 package study.spring.umc_5.repository;
 
-import org.assertj.core.api.Assertions;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +14,15 @@ import study.spring.umc_5.domain.enums.Gender;
 import study.spring.umc_5.domain.enums.MemberStatus;
 import study.spring.umc_5.domain.enums.MissionStatus;
 import study.spring.umc_5.domain.mapping.MemberMission;
+import study.spring.umc_5.repository.member.MemberRepository;
 import study.spring.umc_5.repository.membermission.MemberMissionRepository;
 import study.spring.umc_5.repository.mission.MissionRepository;
 import study.spring.umc_5.repository.store.StoreRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 class MissionRepositoryTest {
@@ -151,11 +153,11 @@ class MissionRepositoryTest {
                 3L, Long.valueOf(memberMissions1.size()));
 
         //then
-        Assertions.assertThat(memberMissions1).hasSize(3)
+        assertThat(memberMissions1).hasSize(3)
                 .extracting(memberMission -> Tuple.tuple(memberMission.getMember().getId(), memberMission.getMissionStatus()))
-                .allSatisfy(tuple -> Assertions.assertThat(tuple).isEqualTo(Tuple.tuple(member.getId(), MissionStatus.CHALLENGING)));
+                .allSatisfy(tuple -> assertThat(tuple).isEqualTo(Tuple.tuple(member.getId(), MissionStatus.CHALLENGING)));
 
-        Assertions.assertThat(memberMissions1.get(0).getId()).isEqualTo(memberMission8.getId());
+        assertThat(memberMissions1.get(0).getId()).isEqualTo(memberMission8.getId());
     }
 
 
@@ -209,9 +211,12 @@ class MissionRepositoryTest {
         //given
         Store store = TestEntityFactory.createTestStore();
 
+        Member member = TestEntityFactory.createTestMember();
+
         Region region = Region.builder()
                 .name("군포시")
                 .build();
+
         store.setRegion(region);
 
         Mission testMission1 = TestEntityFactory.createTestMission();
@@ -221,13 +226,27 @@ class MissionRepositoryTest {
         testMission1.setStore(store);
         testMission2.setStore(store);
         testMission3.setStore(store);
+
+        testMission1.setRegion(region);
+        testMission2.setRegion(region);
+        testMission3.setRegion(region);
+
         regionRepository.save(region);
 
+        memberRepository.save(member);
+
+        MemberMission testMemberMission1 = TestEntityFactory.createTestMemberMission(member, testMission1, MissionStatus.COMPLETE);
+        MemberMission testMemberMission2 = TestEntityFactory.createTestMemberMission(member, testMission2, MissionStatus.COMPLETE);
+        MemberMission testMemberMission3 = TestEntityFactory.createTestMemberMission(member, testMission3, MissionStatus.COMPLETE);
+
+        memberMissionRepository.saveAll(List.of(testMemberMission1, testMemberMission2, testMemberMission3));
 
 
         //when
+        long result = memberMissionRepository.countCompletedMisisonsByRegionId(region.getId(), member.getId());
 
         //then
+        assertThat(result).isEqualTo(3);
     }
 
 

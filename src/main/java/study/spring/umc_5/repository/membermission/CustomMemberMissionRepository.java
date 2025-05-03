@@ -9,5 +9,5 @@ public interface CustomMemberMissionRepository {
     List<MemberMission> findByMemberIdAndMemberMissionStatus(Long memberId, MissionStatus missionStatus, Long limit,
                                                              Long lastMemberMissionId);
 
-    long countCompletedMisisonsByRegionId(Long regionId);
+    long countCompletedMisisonsByRegionId(Long regionId, Long memberId);
 }

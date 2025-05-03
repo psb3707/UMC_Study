@@ -36,4 +36,11 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
 
         return queryFactory.select(qStore).from(qStore).where(booleanBuilder).fetch();
     }
+
+    @Override
+    public List<Store> findByRegionId(Long regionId) {
+        return queryFactory.selectFrom(store).where(store.region.id.eq(regionId)).fetch();
+    }
+
+
 }

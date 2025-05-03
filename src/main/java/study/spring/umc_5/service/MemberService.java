@@ -3,7 +3,7 @@ package study.spring.umc_5.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import study.spring.umc_5.repository.MemberPreferRepository;
-import study.spring.umc_5.repository.MemberRepository;
+import study.spring.umc_5.repository.member.MemberRepository;
 
 @Service
 @RequiredArgsConstructor

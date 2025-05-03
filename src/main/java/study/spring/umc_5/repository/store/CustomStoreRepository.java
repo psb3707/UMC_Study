@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CustomStoreRepository{
     List<Store> dynamicQueryWithBooleanBuilder(String name, Float score);
+    List<Store> findByRegionId(Long regionId);
 }
