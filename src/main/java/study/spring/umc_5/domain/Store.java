@@ -35,8 +35,23 @@ public class Store extends BaseEntity {
     @Builder.Default
     private List<Mission> missions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Review> reviews = new ArrayList<>();
+
     public void setRegion(Region region) {
         this.region = region;
         region.getStores().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
     }
 }

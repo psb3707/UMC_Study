@@ -28,6 +28,10 @@ public class Review extends BaseEntity {
     @Column(nullable = false)
     private double score;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     @Builder.Default
     private List<ReviewImage> reviewImages = new ArrayList<>();

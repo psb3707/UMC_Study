@@ -53,8 +53,6 @@ public class MemberMissionRepositoryImpl implements CustomMemberMissionRepositor
                 .from(memberMission)
                 .join(memberMission.mission, mission)
                 .join(mission.region, region)
-//                .join(mission.store, store)
-//                .join(store.region, region)
                 .where(
                         memberIdEq(memberId),
                         regionIdEq(regionId),
