@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+
+alarm:
+  discord:
+    webhook-url: ""
+  slack:
+    webhook-url: ""

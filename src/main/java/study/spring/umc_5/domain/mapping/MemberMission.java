@@ -29,4 +29,17 @@ public class MemberMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    public static MemberMission of(Member member, Mission mission) {
+        MemberMission memberMission = MemberMission.builder()
+                .missionStatus(MissionStatus.CHALLENGING)
+                .build();
+        memberMission.setMember(member);
+        return memberMission;
+    }
+
+    private void setMember(Member member) {
+        this.member = member;
+        member.getMemberMissions().add(this);
+    }
 }

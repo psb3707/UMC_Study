@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+alarm:
+  discord:
+    webhook-url: https://discord.com/api/webhooks/1370780665452429442/w7hOzl52kSeWhjKmAbB4lrVN3Ov5POTbhRfBfjm-YXapoq0nQZ08lvDdXh4dFccsHrSW
+  slack:
+    webhook-url: https://hooks.slack.com/services/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

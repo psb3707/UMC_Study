@@ -56,22 +56,22 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     @Builder.Default
-    private List<MemberAgree> memberAgreeList = new ArrayList<>();
+    private List<MemberAgree> memberAgrees = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberPrefer> memberPreferList = new ArrayList<>();
+    private List<MemberPrefer> memberPrefers = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Review> reviewList = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberMission> memberMissionList = new ArrayList<>();
+    private List<MemberMission> memberMissions = new ArrayList<>();
 
     public void removePrefer(FoodCategory foodCategory) {
-        memberPreferList.removeIf(m -> m.getFoodCategory().equals(foodCategory));
+        memberPrefers.removeIf(m -> m.getFoodCategory().equals(foodCategory));
     }
 
 }

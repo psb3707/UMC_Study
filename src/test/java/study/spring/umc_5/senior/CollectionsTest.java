@@ -68,7 +68,7 @@ public class CollectionsTest {
         //when
         Member member1 = memberRepository.findById(member.getId()).orElseThrow();
 
-        for (MemberPrefer memberPrefer : member1.getMemberPreferList()) {
+        for (MemberPrefer memberPrefer : member1.getMemberPrefers()) {
             System.out.println(memberPrefer.getId());
         }
 
