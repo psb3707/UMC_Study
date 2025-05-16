@@ -26,10 +26,10 @@ class StoreQueryServiceImplTest {
         //given
         Region region = regionRepository.save(TestEntityFactory.createTestRegion());
 
-        StoreCreateDto storeCreateDto = new StoreCreateDto("춘리마라탕", "경기도 군포시 산본동", region.getId());
+        StoreCreateDto storeCreateDto = new StoreCreateDto("춘리마라탕", "경기도 군포시 산본동");
 
         //when
-        Long savedStoreId = storeQueryService.addStore(storeCreateDto);
+        Long savedStoreId = storeQueryService.addStore(region.getId(), storeCreateDto);
 
         //then
         Assertions.assertThat(savedStoreId).isNotNull();

@@ -3,10 +3,12 @@ package study.spring.umc_5.repository.membermission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import study.spring.umc_5.domain.Member;
 import study.spring.umc_5.domain.enums.MissionStatus;
 import study.spring.umc_5.domain.mapping.MemberMission;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long>, CustomMemberMissionRepository {
 
@@ -22,4 +24,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
                                                        @Param("missionStatus") MissionStatus missionStatus,
                                                        @Param("limit") Long limit,
                                                        @Param("lastMemberMissionId") Long lastMemberMissionId);
+
+    Optional<MemberMission> findByMissionId(Long missionId);
 }

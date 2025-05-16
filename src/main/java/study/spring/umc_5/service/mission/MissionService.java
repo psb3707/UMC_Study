@@ -23,7 +23,6 @@ public class MissionService {
     private final MissionRepository missionRepository;
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
-    private final MemberRepository memberRepository;
 
     @Transactional
     public Long addMission(MissionCreateDto missionCreateDto, Long storeId){

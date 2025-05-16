@@ -12,6 +12,7 @@ import study.spring.umc_5.domain.enums.MissionStatus;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@ToString
 public class MemberMission extends BaseEntity {
 
     @Id
@@ -33,6 +34,7 @@ public class MemberMission extends BaseEntity {
     public static MemberMission of(Member member, Mission mission) {
         MemberMission memberMission = MemberMission.builder()
                 .missionStatus(MissionStatus.CHALLENGING)
+                .mission(mission)
                 .build();
         memberMission.setMember(member);
         return memberMission;

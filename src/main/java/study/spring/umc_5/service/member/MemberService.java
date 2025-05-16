@@ -8,6 +8,7 @@ import study.spring.umc_5.domain.Mission;
 import study.spring.umc_5.domain.mapping.MemberMission;
 import study.spring.umc_5.repository.MemberPreferRepository;
 import study.spring.umc_5.repository.member.MemberRepository;
+import study.spring.umc_5.repository.membermission.MemberMissionRepository;
 import study.spring.umc_5.repository.mission.MissionRepository;
 
 @Service
@@ -21,17 +22,19 @@ public class MemberService {
 
     private final MemberPreferRepository memberPreferRepository;
 
+    private final MemberMissionRepository memberMissionRepository;
+
     @Transactional
     public Long challengeMission(Long missionId) {
         Mission mission = missionRepository.findById(missionId)
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalCallerException("미션이 없습니다."));
 
         Member member = memberRepository.findById(1L)
-                .orElseThrow();
+                .orElseThrow(() -> new IllegalCallerException("회원이 없습니다."));
 
         MemberMission memberMission = MemberMission.of(member, mission);
 
-        memberRepository.save(member);
+        memberMissionRepository.save(memberMission);
 
         return memberMission.getId();
     }

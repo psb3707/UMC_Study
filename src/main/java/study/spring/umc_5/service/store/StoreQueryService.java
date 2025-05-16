@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StoreQueryService {
-    Optional<Store> findStore(Long id);
+    boolean isStoreExists(Long storeId);
     List<Store> findStoresByNameAndScore(String name, Float score);
-    Long addStore(StoreCreateDto storeCreateDto);
+    Long addStore(Long regionId, StoreCreateDto storeCreateDto);
 }

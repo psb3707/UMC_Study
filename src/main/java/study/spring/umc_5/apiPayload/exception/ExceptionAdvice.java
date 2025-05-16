@@ -30,12 +30,14 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     private final AlarmService alarmService;
 
-    @ExceptionHandler
+    @ExceptionHandler(exception = ConstraintViolationException.class)
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+        log.info("커스텀 validation 동작");
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+        log.info("에러 메세지 : {}", errorMessage);
 
         return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY, request);
     }
@@ -112,6 +114,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleExceptionInternalConstraint(Exception e, ErrorStatus errorCommonStatus,
                                                                      HttpHeaders headers, WebRequest request) {
+        log.info("반환 값 생성");
         ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(), errorCommonStatus.getMessage(), null);
         return super.handleExceptionInternal(
                 e,

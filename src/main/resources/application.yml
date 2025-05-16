@@ -10,10 +10,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
         format_sql: true
-    hbm2ddl:
-      auto: update
+        hbm2ddl:
+          auto: update
   profiles:
-    active: prod
+    active: local
 
 alarm:
   slack:

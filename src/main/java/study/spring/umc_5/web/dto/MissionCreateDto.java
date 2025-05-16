@@ -1,5 +1,9 @@
 package study.spring.umc_5.web.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +18,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class MissionCreateDto {
 
-    private int reward;
+    @NotNull
+    @Min(1000)
+    private Integer reward;
+
+    @NotNull
     private LocalDateTime deadline;
+
+    @NotBlank
     private String missionSpec;
 
     public static Mission toMission(MissionCreateDto missionCreateDto, Region region, Store store) {

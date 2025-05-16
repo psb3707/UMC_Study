@@ -21,8 +21,8 @@ public class StoreQueryServiceImpl implements StoreQueryService {
     private final RegionRepository regionRepository;
 
     @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+    public boolean isStoreExists(Long storeId) {
+        return storeRepository.findById(storeId).isPresent();
     }
 
     @Override
@@ -36,9 +36,9 @@ public class StoreQueryServiceImpl implements StoreQueryService {
 
     @Override
     @Transactional
-    public Long addStore(StoreCreateDto storeCreateDto) {
+    public Long addStore(Long regionId, StoreCreateDto storeCreateDto) {
 
-        Region region = regionRepository.findById(storeCreateDto.getRegionId())
+        Region region = regionRepository.findById(regionId)
                 .orElseThrow();
 
         Store store = storeRepository.save(StoreCreateDto.toStore(storeCreateDto, region));
