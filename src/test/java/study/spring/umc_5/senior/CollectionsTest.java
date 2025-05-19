@@ -81,7 +81,7 @@ public class CollectionsTest {
                 .foodCategory(category)
                 .build();
 
-        prefer.addMember(member);
+        prefer.setMember(member);
 
         return prefer;
     }

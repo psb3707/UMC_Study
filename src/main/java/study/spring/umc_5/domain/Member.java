@@ -2,6 +2,9 @@ package study.spring.umc_5.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import study.spring.umc_5.domain.common.BaseEntity;
 import study.spring.umc_5.domain.enums.Gender;
 import study.spring.umc_5.domain.enums.MemberStatus;
@@ -19,6 +22,8 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
+@DynamicUpdate
+@DynamicInsert
 public class Member extends BaseEntity {
 
     @Id
@@ -41,7 +46,7 @@ public class Member extends BaseEntity {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(15)")
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     private MemberStatus memberStatus;
 
     @Enumerated(EnumType.STRING)
@@ -49,9 +54,9 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

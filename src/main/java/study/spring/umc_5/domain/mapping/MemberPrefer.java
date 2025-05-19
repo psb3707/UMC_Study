@@ -25,8 +25,9 @@ public class MemberPrefer extends BaseEntity {
     @JoinColumn(name = "category_id")
     private FoodCategory foodCategory;
 
-    public void addMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
         member.getMemberPrefers().add(this);
     }
+
 }

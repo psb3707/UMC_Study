@@ -3,6 +3,8 @@ package study.spring.umc_5.service.review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import study.spring.umc_5.apiPayload.code.status.ErrorStatus;
+import study.spring.umc_5.apiPayload.exception.GeneralException;
 import study.spring.umc_5.domain.Member;
 import study.spring.umc_5.domain.Review;
 import study.spring.umc_5.domain.Store;
@@ -25,7 +27,8 @@ public class ReviewService {
     @Transactional
     public Long addReview(ReviewCreateDto reviewCreateDto, Long storeId) {
 
-        Member member = memberRepository.findById(1L).orElseThrow();
+        Member member = memberRepository.findById(3L)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
 
         Store store = storeRepository.findById(storeId).orElseThrow();
 
